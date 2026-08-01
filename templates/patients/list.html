@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title"><i class="fas fa-users"></i> Patients</h1>
+            <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add Patient</a>
+        </div>
+
+        <div class="table-card">
+            <div class="table-toolbar">
+                <div class="table-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search patients...">
+                </div>
+                <div class="table-filters">
+                    <select>
+                        <option>All Diseases</option>
+                        <option>General Checkup</option>
+                        <option>Dental Consultation</option>
+                        <option>Eye Consultation</option>
+                        <option>Follow Up</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Phone</th>
+                            <th>Disease</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patient in patients %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td><strong>{{ patient.name }}</strong></td>
+                            <td>{{ patient.age }}</td>
+                            <td>{{ patient.phone }}</td>
+                            <td><span class="disease-tag">{{ patient.disease }}</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="btn-action btn-edit"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="btn-action btn-delete"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                <i class="fas fa-user-injured"></i>
+                                <p>No patients yet.</p>
+                                <a href="#" class="btn btn-primary">Add Patient</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-footer">
+                <span>Showing {{ patients|length }} patients</span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
