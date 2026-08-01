@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title"><i class="fas fa-trash-alt"></i> Delete Doctor</h1>
+        </div>
+
+        <div class="booking-card">
+            <div class="delete-warning">
+                <i class="fas fa-exclamation-triangle" style="font-size:48px; color:#DC2626;"></i>
+                <h2 style="margin:16px 0;">Are you sure you want to delete?</h2>
+                <p><strong>Doctor:</strong> Dr. {{ doctor.name }}</p>
+                <p><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+                <p><strong>Phone:</strong> {{ doctor.phone }}</p>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-actions">
+                    <a href="{% url 'doctor_list' %}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Delete Doctor
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

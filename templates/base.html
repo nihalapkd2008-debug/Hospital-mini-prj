@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <!-- NAVBAR -->
+    <!-- ========== NAVBAR ========== -->
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-left">
@@ -27,15 +27,18 @@
                     <span>AUREA <span class="logo-accent">CLINIC</span></span>
                 </a>
             </div>
+            
             <div class="nav-center" id="navLinks">
                 <ul class="nav-links">
-    <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
-    <li><a href="{% url 'patient_list' %}"><i class="fas fa-users"></i> Patients</a></li>
-    <li><a href="{% url 'doctor_list' %}"><i class="fas fa-user-md"></i> Doctors</a></li>
-<li><a href="{% url 'appointment_list' %}"><i class="fas fa-calendar-check"></i> Appointments</a></li>    <li><a href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a></li>
-    <li><a href="{% url 'contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
-</ul>
+                    <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="{% url 'patient_list' %}"><i class="fas fa-users"></i> Patients</a></li>
+                    <li><a href="{% url 'doctor_list' %}"><i class="fas fa-user-md"></i> Doctors</a></li>
+                    <li><a href="{% url 'appointment_list' %}"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="{% url 'contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
             </div>
+            
             <div class="nav-right">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
@@ -52,16 +55,17 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
+    <!-- ========== MAIN CONTENT ========== -->
     <main>
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- FOOTER -->
+    <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
+                <!-- Brand Column -->
                 <div class="footer-brand">
                     <h3><i class="fas fa-heart-pulse"></i> AUREA CLINIC</h3>
                     <p>Care • Compassion • Excellence</p>
@@ -74,6 +78,8 @@
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+                
+                <!-- Quick Links -->
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
@@ -84,6 +90,8 @@
                         <li><a href="#">Blog</a></li>
                     </ul>
                 </div>
+                
+                <!-- For Patients -->
                 <div class="footer-section">
                     <h4>For Patients</h4>
                     <ul>
@@ -94,6 +102,8 @@
                         <li><a href="#">FAQs</a></li>
                     </ul>
                 </div>
+                
+                <!-- Contact Info -->
                 <div class="footer-section">
                     <h4>Contact Info</h4>
                     <ul class="footer-contact">
@@ -104,6 +114,8 @@
                     </ul>
                 </div>
             </div>
+            
+            <!-- Bottom Bar -->
             <div class="footer-bottom">
                 <p>&copy; 2026 Aurea Clinic. All Rights Reserved. <span>|</span> Designed with <i class="fas fa-heart" style="color:#DC2626;"></i></p>
             </div>
