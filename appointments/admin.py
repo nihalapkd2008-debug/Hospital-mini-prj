@@ -6,12 +6,14 @@ class AppointmentAdmin(admin.ModelAdmin):
     search_fields = ('patient__name', 'doctor__name')
     list_filter = ('status', 'date')
     date_hierarchy = 'date'
+    list_per_page = 10
 
 class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'subject', 'created_at', 'is_read')
     search_fields = ('name', 'email', 'subject')
     list_filter = ('is_read', 'created_at')
     readonly_fields = ('created_at',)
+    list_per_page = 10
 
 admin.site.register(Appointment, AppointmentAdmin)
 admin.site.register(ContactMessage, ContactMessageAdmin)
