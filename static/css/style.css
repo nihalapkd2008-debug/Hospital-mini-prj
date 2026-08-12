@@ -46,7 +46,7 @@ body {
 }
 
 /* ============================================================
-   NAVBAR - FIXED LOGO LEFT & LINKS CENTER
+   NAVBAR - CLEAN FIX (replace existing .navbar block with this)
    ============================================================ */
 .navbar {
     background: var(--primary);
@@ -56,62 +56,62 @@ body {
     z-index: 1000;
     transition: var(--transition);
 }
-
+ 
 .navbar.scrolled {
     padding: 10px 0;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
-
+ 
 .navbar .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: nowrap;
 }
-
-/* ===== LOGO - LEFT SIDE ===== */
+ 
+/* ===== LOGO - LEFT ===== */
+.nav-left {
+    flex-shrink: 0;
+}
+ 
 .nav-left .logo {
     font-family: 'Cinzel', serif;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
     color: #fff;
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     white-space: nowrap;
 }
-
+ 
 .nav-left .logo i {
     color: var(--accent);
-    font-size: 30px;
-    animation: pulse 2s ease-in-out infinite;
+    font-size: 26px;
 }
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
+ 
 .logo-accent {
     color: var(--accent);
 }
-
+ 
 /* ===== NAV LINKS - CENTER ===== */
 .nav-center {
     flex: 1;
     display: flex;
     justify-content: center;
+    min-width: 0;
 }
-
+ 
 .nav-center .nav-links {
     display: flex;
     list-style: none;
-    gap: 28px;
+    gap: 4px;
     margin: 0;
     padding: 0;
 }
-
+ 
 .nav-center .nav-links li a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
@@ -124,92 +124,83 @@ body {
     gap: 6px;
     padding: 8px 14px;
     border-radius: 8px;
+    white-space: nowrap;
 }
-
+ 
 .nav-center .nav-links li a:hover,
 .nav-center .nav-links li a.active {
     color: #fff;
     background: rgba(0, 180, 216, 0.15);
 }
-
-.nav-center .nav-links li a i {
-    font-size: 16px;
-}
-
+ 
 /* ===== RIGHT SIDE ===== */
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     flex-shrink: 0;
 }
-
+ 
 .search-box {
     display: flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 25px;
     padding: 8px 16px;
-    gap: 10px;
+    gap: 8px;
     transition: var(--transition);
 }
-
+ 
 .search-box:focus-within {
     background: rgba(255, 255, 255, 0.15);
     box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.3);
 }
-
-.search-box i {
-    color: var(--accent);
-}
-
+ 
+.search-box i { color: var(--accent); font-size: 13px; }
+ 
 .search-box input {
     background: transparent;
     border: none;
     outline: none;
     color: #fff;
     font-size: 14px;
-    width: 140px;
+    width: 130px;
     font-family: 'Inter', sans-serif;
 }
-
-.search-box input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-}
-
+ 
+.search-box input::placeholder { color: rgba(255, 255, 255, 0.4); }
+ 
 .admin-profile {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    transition: var(--transition);
     padding: 6px 14px;
     border-radius: 25px;
     background: rgba(0, 180, 216, 0.1);
+    white-space: nowrap;
+    transition: var(--transition);
 }
-
+ 
 .admin-profile:hover {
     color: #fff;
     background: rgba(0, 180, 216, 0.25);
 }
-
-.admin-profile i {
-    font-size: 24px;
-    color: var(--accent);
-}
-
+ 
+.admin-profile i { font-size: 22px; color: var(--accent); }
+ 
 .hamburger {
     display: none;
     color: #fff;
-    font-size: 24px;
+    font-size: 22px;
     cursor: pointer;
     background: none;
     border: none;
-    padding: 4px 8px;
 }
+
 
 /* ============================================================
    HERO SECTION

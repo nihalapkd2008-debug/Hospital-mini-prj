@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Patient
+from .models import Patient, MedicalRecord
 
 class PatientAdmin(admin.ModelAdmin):
     list_display = ('name', 'age', 'phone', 'disease')
@@ -7,4 +7,5 @@ class PatientAdmin(admin.ModelAdmin):
     list_filter = ('disease',)
     list_per_page = 10
 
-admin.site.register(Patient, PatientAdmin)
+admin.site.register(Patient)
+admin.site.register(MedicalRecord)

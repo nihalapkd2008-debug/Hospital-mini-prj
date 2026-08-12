@@ -4,29 +4,22 @@
 {% block content %}
 <section class="page-section">
     <div class="container">
-       <div class="page-header">
-    <h1 class="page-title"><i class="fas fa-calendar-check"></i> Appointments</h1>
-    <a href="{% url 'book_appointment' %}" class="btn btn-primary btn-sm">
-        <i class="fas fa-plus"></i> Book Appointment
-    </a>
-</div>
+        <div class="page-header">
+            <h1 class="page-title"><i class="fas fa-calendar-check"></i> Appointments</h1>
+            <a href="{% url 'book_appointment' %}" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Book Appointment
+            </a>
+        </div>
+
+        {% if messages %}
+            <div class="success-message">
+                {% for message in messages %}
+                    <p><i class="fas fa-check-circle"></i> {{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
 
         <div class="table-card">
-            <div class="table-toolbar">
-                <div class="table-search">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search appointments...">
-                </div>
-                <div class="table-filters">
-                    <select>
-                        <option>All Status</option>
-                        <option>Confirmed</option>
-                        <option>Pending</option>
-                        <option>Completed</option>
-                    </select>
-                </div>
-            </div>
-
             <div class="table-responsive">
                 <table class="data-table">
                     <thead>
@@ -55,8 +48,12 @@
                             </td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="#" class="btn-action btn-edit"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="btn-action btn-delete"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="{% url 'appointment_update' appointment.id %}" class="btn-action btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'appointment_delete' appointment.id %}" class="btn-action btn-delete">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
@@ -65,15 +62,12 @@
                             <td colspan="7" class="empty-state">
                                 <i class="fas fa-calendar-day"></i>
                                 <p>No appointments yet.</p>
-                                <a href="#" class="btn btn-primary">Book Appointment</a>
+                                <a href="{% url 'book_appointment' %}" class="btn btn-primary">Book Appointment</a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
-            <div class="table-footer">
-                <span>Showing {{ appointments|length }} appointments</span>
             </div>
         </div>
     </div>

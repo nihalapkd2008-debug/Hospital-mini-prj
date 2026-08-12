@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from appointments.models import Appointment
 from patients.models import Patient
 from doctors.models import Doctor
 
+# ========== APPOINTMENT LIST ==========
 def appointment_list(request):
     appointments = Appointment.objects.all()
     patients = Patient.objects.all()
@@ -16,6 +17,7 @@ def appointment_list(request):
     }
     return render(request, 'appointments/list.html', context)
 
+# ========== BOOK APPOINTMENT ==========
 def book_appointment(request):
     if request.method == 'POST':
         patient_id = request.POST.get('patient')
@@ -45,3 +47,38 @@ def book_appointment(request):
         'patients': patients,
         'doctors': doctors
     })
+
+# ========== UPDATE APPOINTMENT ==========
+def appointment_update(request, pk):
+    appointment = get_object_or_404(Appointment, id=pk)
+    
+    if request.method == 'POST':
+        appointment.patient_id = request.POST.get('patient')
+        appointment.doctor_id = request.POST.get('doctor')
+        appointment.date = request.POST.get('date')
+        appointment.time = request.POST.get('time')
+        appointment.reason = request.POST.get('reason')
+        appointment.status = request.POST.get('status')
+        appointment.save()
+        
+        messages.success(request, 'Appointment updated successfully!')
+        return redirect('appointment_list')
+    
+    patients = Patient.objects.all()
+    doctors = Doctor.objects.all()
+    return render(request, 'appointments/update.html', {
+        'appointment': appointment,
+        'patients': patients,
+        'doctors': doctors
+    })
+
+# ========== DELETE APPOINTMENT ==========
+def appointment_delete(request, pk):
+    appointment = get_object_or_404(Appointment, id=pk)
+    
+    if request.method == 'POST':
+        appointment.delete()
+        messages.success(request, 'Appointment deleted successfully!')
+        return redirect('appointment_list')
+    
+    return render(request, 'appointments/delete.html', {'appointment': appointment})

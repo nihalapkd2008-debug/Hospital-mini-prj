@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title"><i class="fas fa-edit"></i> Update Appointment</h1>
+        </div>
+
+        <div class="booking-card">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Patient</label>
+                    <select name="patient" class="form-input" required>
+                        {% for patient in patients %}
+                        <option value="{{ patient.id }}" {% if patient.id == appointment.patient.id %}selected{% endif %}>
+                            {{ patient.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user-md"></i> Doctor</label>
+                    <select name="doctor" class="form-input" required>
+                        {% for doctor in doctors %}
+                        <option value="{{ doctor.id }}" {% if doctor.id == appointment.doctor.id %}selected{% endif %}>
+                            Dr. {{ doctor.name }} - {{ doctor.specialization }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-day"></i> Date</label>
+                        <input type="date" name="date" value="{{ appointment.date|date:'Y-m-d' }}" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-clock"></i> Time</label>
+                        <input type="time" name="time" value="{{ appointment.time|time:'H:i' }}" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-comment"></i> Reason</label>
+                    <input type="text" name="reason" value="{{ appointment.reason }}" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Status</label>
+                    <select name="status" class="form-input">
+                        <option value="Pending" {% if appointment.status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option value="Confirmed" {% if appointment.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+                        <option value="Completed" {% if appointment.status == 'Completed' %}selected{% endif %}>Completed</option>
+                        <option value="Cancelled" {% if appointment.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <a href="{% url 'appointment_list' %}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Update Appointment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
