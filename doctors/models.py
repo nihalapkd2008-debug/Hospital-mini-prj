@@ -16,7 +16,9 @@ class Doctor(models.Model):
 
     department = models.ForeignKey(
         Department,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
     )
 
     def __str__(self):
