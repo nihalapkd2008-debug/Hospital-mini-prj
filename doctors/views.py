@@ -7,7 +7,9 @@ from .models import Doctor, Department
 
 def doctor_list(request):
     doctors = Doctor.objects.all()
-    return render(request, 'doctors/list.html', {'doctors': doctors})
+    return render(request, 'doctors/list.html', {
+        'doctors': doctors
+    })
 
 
 # ========== DOCTOR CREATE ==========
@@ -16,12 +18,14 @@ def doctor_create(request):
     departments = Department.objects.all()
 
     if request.method == 'POST':
+        department_id = request.POST.get('department')
+
         Doctor.objects.create(
             name=request.POST.get('name'),
             specialization=request.POST.get('specialization'),
             phone=request.POST.get('phone'),
             email=request.POST.get('email'),
-            department_id=request.POST.get('department')
+            department_id=department_id
         )
 
         messages.success(request, 'Doctor added successfully!')
@@ -43,7 +47,9 @@ def doctor_update(request, pk):
         doctor.specialization = request.POST.get('specialization')
         doctor.phone = request.POST.get('phone')
         doctor.email = request.POST.get('email')
-        doctor.department_id = request.POST.get('department')
+
+        department_id = request.POST.get('department')
+        doctor.department = Department.objects.get(id=department_id)
 
         doctor.save()
 
@@ -66,4 +72,6 @@ def doctor_delete(request, pk):
         messages.success(request, 'Doctor deleted successfully!')
         return redirect('doctor_list')
 
-    return render(request, 'doctors/delete.html', {'doctor': doctor})
+    return render(request, 'doctors/delete.html', {
+        'doctor': doctor
+    })

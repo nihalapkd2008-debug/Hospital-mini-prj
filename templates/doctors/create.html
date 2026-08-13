@@ -1,17 +1,26 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <section class="page-section">
   <div class="container">
+
     <div class="page-header">
-      <h1 class="page-title"><i class="fas fa-user-md"></i> Add Doctor</h1>
+      <h1 class="page-title">
+        <i class="fas fa-user-md"></i> Add Doctor
+      </h1>
     </div>
 
     <div class="booking-card">
+
       <form method="POST">
         {% csrf_token %}
 
         <!-- Name -->
         <div class="form-group">
-          <label> <i class="fas fa-user"></i> Name </label>
+          <label>
+            <i class="fas fa-user"></i> Name
+          </label>
 
           <input
             type="text"
@@ -24,7 +33,9 @@
 
         <!-- Specialization -->
         <div class="form-group">
-          <label> <i class="fas fa-stethoscope"></i> Specialization </label>
+          <label>
+            <i class="fas fa-stethoscope"></i> Specialization
+          </label>
 
           <input
             type="text"
@@ -35,21 +46,28 @@
           />
         </div>
 
+        <!-- Department -->
         <div class="form-group">
-          <label> <i class="fas fa-building"></i> Department </label>
+          <label>
+            <i class="fas fa-building"></i> Department
+          </label>
 
           <select name="department" class="form-input" required>
             <option value="">Select Department</option>
 
             {% for department in departments %}
-            <option value="{{ department.id }}">{{ department.name }}</option>
+              <option value="{{ department.id }}">
+                {{ department.name }}
+              </option>
             {% endfor %}
           </select>
         </div>
 
         <!-- Phone -->
         <div class="form-group">
-          <label> <i class="fas fa-phone"></i> Phone </label>
+          <label>
+            <i class="fas fa-phone"></i> Phone
+          </label>
 
           <input
             type="text"
@@ -62,7 +80,9 @@
 
         <!-- Email -->
         <div class="form-group">
-          <label> <i class="fas fa-envelope"></i> Email </label>
+          <label>
+            <i class="fas fa-envelope"></i> Email
+          </label>
 
           <input
             type="email"
@@ -74,27 +94,23 @@
         </div>
 
         <!-- Buttons -->
-        <div class="form-group">
-          <label> <i class="fas fa-building"></i> Department </label>
-
-          <select name="department" class="form-input" required>
-            <option value="">Select Department</option>
-
-            {% for department in departments %}
-            <option value="{{ department.id }}">{{ department.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
         <div class="form-actions">
-          <a href="{% url 'doctor_list' %}" class="btn btn-secondary">
+
+          <a
+            href="{% url 'doctor_list' %}"
+            class="btn btn-secondary"
+          >
             Cancel
           </a>
 
           <button type="submit" class="btn btn-primary">
             <i class="fas fa-save"></i> Add Doctor
           </button>
+
         </div>
+
       </form>
+
     </div>
   </div>
 </section>

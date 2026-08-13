@@ -1,15 +1,26 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <section class="page-section">
   <div class="container">
+
     <div class="page-header">
-      <h1 class="page-title"><i class="fas fa-user-edit"></i> Update Doctor</h1>
+      <h1 class="page-title">
+        <i class="fas fa-user-edit"></i> Update Doctor
+      </h1>
     </div>
 
     <div class="booking-card">
       <form method="POST">
         {% csrf_token %}
+
+        <!-- Name -->
         <div class="form-group">
-          <label><i class="fas fa-user"></i> Name</label>
+          <label>
+            <i class="fas fa-user"></i> Name
+          </label>
+
           <input
             type="text"
             name="name"
@@ -18,8 +29,13 @@
             required
           />
         </div>
+
+        <!-- Specialization -->
         <div class="form-group">
-          <label><i class="fas fa-stethoscope"></i> Specialization</label>
+          <label>
+            <i class="fas fa-stethoscope"></i> Specialization
+          </label>
+
           <input
             type="text"
             name="specialization"
@@ -28,8 +44,13 @@
             required
           />
         </div>
+
+        <!-- Phone -->
         <div class="form-group">
-          <label><i class="fas fa-phone"></i> Phone</label>
+          <label>
+            <i class="fas fa-phone"></i> Phone
+          </label>
+
           <input
             type="text"
             name="phone"
@@ -38,8 +59,13 @@
             required
           />
         </div>
+
+        <!-- Email -->
         <div class="form-group">
-          <label><i class="fas fa-envelope"></i> Email</label>
+          <label>
+            <i class="fas fa-envelope"></i> Email
+          </label>
+
           <input
             type="email"
             name="email"
@@ -48,40 +74,58 @@
             required
           />
         </div>
+
+        <!-- Department -->
         <div class="form-group">
-          <label> <i class="fas fa-building"></i> Department </label>
+          <label>
+            <i class="fas fa-hospital"></i> Department
+          </label>
 
           <select name="department" class="form-input" required>
-            <option value="">Select Department</option>
+
+            <option value="">
+              Select Department
+            </option>
 
             {% for department in departments %}
 
-            <option
-              value="{{ department.id }}"
-              {%
-              if
-              doctor.department.id=""
-              ="department.id"
-              %}
-              selected
-              {%
-              endif
-              %}
-            >
-              {{ department.name }}
-            </option>
+              <option
+                value="{{ department.id }}"
+                {% if doctor.department.id == department.id %}
+                  selected
+                {% endif %}
+              >
+                {{ department.name }}
+              </option>
 
             {% endfor %}
+
           </select>
         </div>
+
+        <!-- Buttons -->
         <div class="form-actions">
-          <a href="{% url 'doctor_list' %}" class="btn btn-secondary">Cancel</a>
-          <button type="submit" class="btn btn-primary">
-            <i class="fas fa-save"></i> Update Doctor
+
+          <a
+            href="{% url 'doctor_list' %}"
+            class="btn btn-secondary"
+          >
+            Cancel
+          </a>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            <i class="fas fa-save"></i>
+            Update Doctor
           </button>
+
         </div>
+
       </form>
     </div>
+
   </div>
 </section>
 {% endblock %}
