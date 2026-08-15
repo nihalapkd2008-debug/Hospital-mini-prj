@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+</head>
+<body>
+
+    <h1>My Profile</h1>
+
+    {% if profile.avatar %}
+        <img
+            src="{{ profile.avatar.url }}"
+            alt="Profile Picture"
+            width="150"
+        >
+    {% else %}
+        <p>No profile picture uploaded.</p>
+    {% endif %}
+
+    <h2>{{ profile.user.username }}</h2>
+
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+
+    <p><strong>Phone:</strong> {{ profile.phone }}</p>
+
+</body>
+</html>
