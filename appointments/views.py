@@ -8,7 +8,16 @@ from doctors.models import Doctor
 
 # ========== APPOINTMENT LIST ==========
 def appointment_list(request):
-    appointments = Appointment.objects.all()
+    appointments = Appointment.objects.select_related(
+        'patient',
+        'doctor'
+    )
+
+    # N+1 Query Problem
+    for appointment in appointments:
+        print(appointment.patient.name)
+        print(appointment.doctor.name)
+
     patients = Patient.objects.all()
     doctors = Doctor.objects.all()
 

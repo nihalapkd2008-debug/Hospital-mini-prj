@@ -75,3 +75,15 @@ def doctor_delete(request, pk):
     return render(request, 'doctors/delete.html', {
         'doctor': doctor
     })
+
+
+# ========== DAY 3: CARDIOLOGY DOCTORS ==========
+
+def cardiology_doctors(request):
+    doctors = Doctor.objects.filter(
+        department__name='Cardiology'
+    )
+
+    return render(request, 'doctors/cardiology_doctors.html', {
+        'doctors': doctors
+    })

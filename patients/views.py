@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 from patients.models import Patient, Profile
 from doctors.models import Doctor
@@ -112,3 +113,11 @@ def contact(request):
         return redirect('contact')
 
     return render(request, 'contact.html')
+
+def treatment_queries(request):
+    patients = Patient.objects.prefetch_related('treatments')
+
+    for patient in patients:
+        list(patient.treatments.all())
+
+    return HttpResponse("Treatment query test completed")

@@ -23,6 +23,9 @@ urlpatterns = [
     path('patients/', include('patients.urls')),
     path('doctors/', include('doctors.urls')),
     path('appointments/', include('appointments.urls')),
+
+    # Django Debug Toolbar
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 

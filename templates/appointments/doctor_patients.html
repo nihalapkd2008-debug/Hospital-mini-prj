@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Patients of Dr. {{ doctor.name }}</h1>
+
+{% if patients %}
+    {% for patient in patients %}
+        <p>{{ patient.name }}</p>
+    {% endfor %}
+{% else %}
+    <p>No patients assigned to this doctor.</p>
+{% endif %}
+
+{% endblock %}
