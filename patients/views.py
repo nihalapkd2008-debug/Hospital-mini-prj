@@ -77,13 +77,22 @@ def patient_delete(request, pk):
 # ========== PROFILE ==========
 @login_required
 def profile_view(request):
-    profile = get_object_or_404(Profile, user=request.user)
+    try:
+        profile = Profile.objects.get(user=request.user)
+    except Profile.DoesNotExist:
+        # Create a profile if it doesn't exist
+        profile = Profile.objects.create(
+            user=request.user,
+            bio="No bio provided yet.",
+            phone="Not specified"
+        )
+        messages.info(request, 'Profile created successfully!')
+    
+    context = {
+        'profile': profile,
+    }
+    return render(request, 'patients/profile.html', context)
 
-    return render(
-        request,
-        'patients/profile.html',
-        {'profile': profile}
-    )
 
 # ========== ABOUT ==========
 def about(request):
