@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Doctors in Cardiology</h1>
+
+{% if doctors %}
+    {% for doctor in doctors %}
+        <p>{{ doctor.name }}</p>
+    {% endfor %}
+{% else %}
+    <p>No doctors found in Cardiology department.</p>
+{% endif %}
+
+{% endblock %}

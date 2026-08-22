@@ -2,241 +2,198 @@
 {% load static %}
 
 {% block content %}
-<!-- HERO SECTION -->
+<style>
+    /* Home Page Specific Styles (Overrides base style for hero section) */
+    .hero-section {
+        min-height: 85vh; /* മുഴുവൻ സ്ക്രീൻ ഉയരത്തിൽ ഹീറോ സെക്ഷൻ */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at 30% 20%, #0e1a2b 0%, #05101f 100%);
+        text-align: center;
+        padding: 4rem 1.5rem;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    /* Background Glow Effects */
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -20%;
+        left: -10%;
+        width: 60%;
+        height: 80%;
+        background: radial-gradient(circle, rgba(0, 180, 216, 0.15) 0%, transparent 70%);
+        filter: blur(80px);
+        z-index: 0;
+    }
+
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        bottom: -20%;
+        right: -10%;
+        width: 60%;
+        height: 80%;
+        background: radial-gradient(circle, rgba(0, 119, 182, 0.1) 0%, transparent 70%);
+        filter: blur(80px);
+        z-index: 0;
+    }
+
+    /* Content Wrapper */
+    .hero-content {
+        position: relative;
+        z-index: 10;
+        max-width: 900px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        background: rgba(0, 180, 216, 0.15);
+        border: 1px solid rgba(0, 180, 216, 0.3);
+        color: #90e0ef;
+        padding: 0.5rem 1.5rem;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        backdrop-filter: blur(4px);
+    }
+
+    .hero-title {
+        font-size: 4.5rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+        color: #ffffff;
+        font-family: 'Cinzel', serif; /* ഇത് നിങ്ങളുടെ base.html ഫോണ്ട് ഉപയോഗിക്കും */
+    }
+
+    .hero-title span {
+        color: #00b4d8;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 2.5rem;
+    }
+
+    .hero-features {
+        display: flex;
+        justify-content: center;
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1rem;
+    }
+
+    .hero-features i {
+        color: #00b4d8;
+        margin-right: 8px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+    }
+
+    /* Base-ലെ ബട്ടണുകൾക്കൊപ്പം പ്രവർത്തിക്കാൻ */
+    .btn-primary {
+        background: linear-gradient(135deg, #00b4d8, #0077b6);
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 180, 216, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(0, 180, 216, 0.5);
+    }
+
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.8rem;
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+        .hero-features {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
 <section class="hero-section">
-    <div class="container">
-        <div class="hero-content" data-aos="fade-up">
-            <div class="hero-badge">
-                <i class="fas fa-shield-alt"></i> Trusted Healthcare Provider
-            </div>
-            <h1>
-                <span class="hero-subtitle">Welcome to</span>
-                AUREA <span class="hero-accent">CLINIC</span>
-            </h1>
-            <p class="hero-text">Healthcare Management System</p>
-            <div class="hero-tagline">
-                <span><i class="fas fa-heart"></i> Compassion</span>
-                <span><i class="fas fa-hand-holding-heart"></i> Care</span>
-                <span><i class="fas fa-star"></i> Excellence</span>
-            </div>
-            <div class="hero-buttons">
-    <a href="{% url 'patient_list' %}" class="btn btn-primary">
-        <i class="fas fa-users"></i> View Patients
-    </a>
-    <a href="{% url 'appointment_list' %}" class="btn btn-secondary">
-        <i class="fas fa-calendar-plus"></i> Book Appointment
-    </a>
-</div>
+    <div class="hero-content" data-aos="fade-up">
+        <div class="hero-badge">
+            <i class="fas fa-shield-alt"></i> Trusted Healthcare Provider
         </div>
-    </div>
-</section>
-
-<!-- STATS SECTION -->
-<section class="stats-section">
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="stat-icon"><i class="fas fa-user-injured"></i></div>
-                <div class="stat-number">{{ total_patients }}</div>
-                <div class="stat-label">Total Patients</div>
-                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 12 this week</div>
-            </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="stat-icon"><i class="fas fa-user-md"></i></div>
-                <div class="stat-number">{{ total_doctors }}</div>
-                <div class="stat-label">Total Doctors</div>
-                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 2 this week</div>
-            </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
-                <div class="stat-number">{{ total_appointments }}</div>
-                <div class="stat-label">Appointments</div>
-                <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 18 today</div>
-            </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="stat-icon"><i class="fas fa-building"></i></div>
-                <div class="stat-number">12</div>
-                <div class="stat-label">Departments</div>
-                <div class="stat-change active">All Active</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- RECENT APPOINTMENTS + DEPARTMENT OVERVIEW -->
-<section class="dashboard-section">
-    <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <h2><i class="fas fa-clock"></i> Recent Appointments</h2>
-            <a href="{% url 'appointment_list' %}" class="view-all-link">View all <i class="fas fa-arrow-right"></i></a>
-        </div>
+        <h1 class="hero-title">
+            Welcome to<br>
+            <span>AUREA CLINIC</span>
+        </h1>
+        <p class="hero-subtitle">Healthcare Management System</p>
         
-        <div class="appointments-card" data-aos="fade-up">
-            <div class="table-responsive">
-                <table class="appointment-table">
-                    <thead>
-                        <tr>
-                            <th>Patient</th>
-                            <th>Doctor</th>
-                            <th>Time</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for appointment in appointments|slice:":5" %}
-                        <tr>
-                            <td>
-                                <strong>{{ appointment.patient.name }}</strong>
-                                <small>{{ appointment.reason|default:"General Checkup" }}</small>
-                            </td>
-                            <td>
-                                <strong>Dr. {{ appointment.doctor.name }}</strong>
-                                <small>{{ appointment.doctor.specialization }}</small>
-                            </td>
-                            <td>{{ appointment.time|time:"h:i A" }}</td>
-                            <td>
-                                <span class="status-badge {% if appointment.status == 'Confirmed' %}status-confirmed{% else %}status-pending{% endif %}">
-                                    {{ appointment.status }}
-                                </span>
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="4" style="text-align:center; padding:40px; color:#94A3B8;">
-                                <i class="fas fa-calendar-day" style="font-size:30px; display:block; margin-bottom:10px;"></i>
-                                No appointments yet.
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        <div class="hero-features">
+            <span><i class="fas fa-heart"></i> Compassion</span>
+            <span><i class="fas fa-user-nurse"></i> Care</span>
+            <span><i class="fas fa-star"></i> Excellence</span>
+        </div>
+
+        <div class="hero-buttons">
+            <!-- നിങ്ങളുടെ patients app-ലേക്കുള്ള ലിങ്കുകൾ -->
+            <a href="{% url 'patient_list' %}" class="btn-primary">
+                <i class="fas fa-users"></i> View Patients
+            </a>
+            <a href="{% url 'appointment_list' %}" class="btn-secondary">
+                <i class="fas fa-calendar-plus"></i> Book Appointment
+            </a>
         </div>
     </div>
 </section>
 
-<!-- DEPARTMENT OVERVIEW + TODAY'S SCHEDULE -->
-<section class="dashboard-section">
-    <div class="container">
-        <div class="two-column-grid">
-            <!-- Department Overview -->
-            <div class="section-card" data-aos="fade-right">
-                <h2 class="section-title"><i class="fas fa-building"></i> Department Overview</h2>
-                <div class="department-list">
-                    <div class="dept-item">
-                        <span class="dept-name">General Medicine</span>
-                        <div class="progress-bar">
-                            <div class="progress" style="width:35%; background:linear-gradient(90deg,#00B4D8,#0090b3);"></div>
-                        </div>
-                        <span class="dept-percent">35%</span>
-                    </div>
-                    <div class="dept-item">
-                        <span class="dept-name">Pediatrics</span>
-                        <div class="progress-bar">
-                            <div class="progress" style="width:20%; background:linear-gradient(90deg,#16A34A,#0f7a34);"></div>
-                        </div>
-                        <span class="dept-percent">20%</span>
-                    </div>
-                    <div class="dept-item">
-                        <span class="dept-name">Dermatology</span>
-                        <div class="progress-bar">
-                            <div class="progress" style="width:15%; background:linear-gradient(90deg,#DC2626,#a31b1b);"></div>
-                        </div>
-                        <span class="dept-percent">15%</span>
-                    </div>
-                    <div class="dept-item">
-                        <span class="dept-name">Gynecology</span>
-                        <div class="progress-bar">
-                            <div class="progress" style="width:15%; background:linear-gradient(90deg,#FF6B35,#cc4818);"></div>
-                        </div>
-                        <span class="dept-percent">15%</span>
-                    </div>
-                    <div class="dept-item">
-                        <span class="dept-name">Other</span>
-                        <div class="progress-bar">
-                            <div class="progress" style="width:15%; background:linear-gradient(90deg,#6C63FF,#4a42cc);"></div>
-                        </div>
-                        <span class="dept-percent">15%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Today's Schedule -->
-            <div class="section-card" data-aos="fade-left">
-                <h2 class="section-title"><i class="fas fa-calendar-day"></i> Today's Schedule</h2>
-                <div class="schedule-list">
-                    <div class="schedule-item">
-                        <span class="schedule-time">09:30 AM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments today <strong>5</strong></span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">10:15 AM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments 09:30 AM - 10:15 AM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">11:00 AM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments 10:30 AM - 11:00 AM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">11:45 AM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments 11:30 AM - 12:30 PM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">01:30 PM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments 01:30 PM - 02:30 PM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">03:30 PM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments 03:30 PM - 04:30 PM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">05:30 PM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments 05:30 PM - 06:30 PM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">07:30 PM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments 07:30 PM - 08:30 PM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">09:30 PM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments 09:30 PM - 10:30 PM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">11:30 PM</span>
-                        <span class="schedule-dot"></span>
-                        <span class="schedule-text">Appointments 11:30 PM - 12:30 AM</span>
-                    </div>
-                </div>
-                <div class="view-all">
-                    <a href="{% url 'appointment_list' %}" class="view-all-link">View all appointments <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA SECTION -->
-<section class="cta-section" data-aos="fade-up">
-    <div class="container">
-        <div class="cta-content">
-            <div class="cta-text">
-                <h2>24/7 Support Available</h2>
-                <p>Our team is here to help you anytime, anywhere.</p>
-            </div>
-            <div class="cta-contact">
-                <i class="fas fa-phone-alt"></i>
-                <span>+91 98765 43210</span>
-            </div>
-        </div>
-    </div>
-</section>
 {% endblock %}
